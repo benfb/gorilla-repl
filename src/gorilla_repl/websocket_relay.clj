@@ -25,7 +25,7 @@
   [channel data]
   (let [json-data (json/generate-string data)]
     #_(println json-data)
-    (server/send! channel json-data))))
+    (server/send! channel json-data)))
 
 (defn- process-message
   [channel data]

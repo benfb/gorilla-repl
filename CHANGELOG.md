@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 0.5.1
+- Fix typo
+
 ## Version 0.5.0
 - Simplify nrepl printing middleware using new custom printing options (see [this PR](https://github.com/nrepl/nrepl/pull/59))
 - Clojure 1.9 support (thanks to @elisehuard, @include, @glts, and @gscacco)
