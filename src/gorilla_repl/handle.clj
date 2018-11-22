@@ -30,7 +30,9 @@
     (let [_ (print (str "Loading: " ws-file " ... "))
           ws-data (if (files/gorilla-file? (io/file ws-file))
                     (slurp (str ws-file) :encoding "UTF-8")
-                    (str ";; gorilla-repl.fileformat = 1\n\n;; @@\n" (slurp (str ws-file) :encoding "UTF-8") "\n;; @@\n"))
+                    (str ";; gorilla-repl.fileformat = 1\n\n;; @@\n"
+                         (slurp (str ws-file) :encoding "UTF-8")
+                         ";; @@\n"))
           _ (println "done.")]
       (res/response {:worksheet-data ws-data}))))
 

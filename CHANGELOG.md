@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 0.5.2
+- Fix the creation of extraneous newline characters when loading a non-Gorilla Clojure file (#286)
+
 ## Version 0.5.1
 - Fix typo
 

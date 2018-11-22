@@ -49,10 +49,13 @@
     file))
 
 (defn include-file?
-  "Should a file be included in the 'load file' list? Currently all .cljw, .cljs, .cljc, .hl and .clj files with a Gorilla header
-  are included."
+  "Should a file be included in the 'load file' list? Currently all .cljw, .cljs, .cljc, .hl and .clj files are included."
   [file]
-  (or (cljw-file? file) (cljs-file? file) (cljc-file? file) (clj-file? file) (hl-file? file)))
+  (or (cljw-file? file)
+      (cljs-file? file)
+      (cljc-file? file)
+      (clj-file? file)
+      (hl-file? file)))
 
 (defn gorilla-filepaths-in-current-directory
   [excludes]
