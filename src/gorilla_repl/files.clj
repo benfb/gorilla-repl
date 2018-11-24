@@ -31,7 +31,6 @@
   [file]
   (ends-with (.getName file) ".hl"))
 
-
 (defn gorilla-file?
   [file]
   (when (.isFile file)

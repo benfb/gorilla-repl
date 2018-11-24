@@ -2,6 +2,8 @@
 
 ## Version 0.5.2
 - Fix the creation of extraneous newline characters when loading a non-Gorilla Clojure file (#286)
+- Warn in the browser when closing the Gorilla tab (this will be optional in 0.5.3) (#236)
+- Upgrade to the most recent Codemirror version
 
 ## Version 0.5.1
 - Fix typo
