@@ -28,7 +28,6 @@ var render = function (data, element, errorCallback) {
 
 
 var renderPart = function (data, callbackQueue, errorCallback) {
-
     switch (data.type) {
         case "html":
             return renderHTML(data, callbackQueue, errorCallback);

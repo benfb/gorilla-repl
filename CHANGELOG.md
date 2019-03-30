@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 0.6.0
+- Fix printing bug caused by new nREPL version (#10)
+
 ## Version 0.5.3
 - Update the version update check server to be hosted by me
 
