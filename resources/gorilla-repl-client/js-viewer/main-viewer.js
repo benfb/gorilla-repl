@@ -88,5 +88,10 @@ $(function () {
             $.get('/test.clj').success(function (data) {
                 viewer.start(data, "http://gorilla-repl.org/", "test.clj", source);
             });
+        case "file":
+            var path = getParameterByName("path");
+            $.get(path).success(function(data) {
+                viewer.start(data, path, path, source);
+            });
     }
 });
