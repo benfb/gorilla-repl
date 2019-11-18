@@ -28,6 +28,16 @@ var app = function () {
     };
 
     self.start = function (worksheetData, sourceURL, worksheetName, source) {
+        var host = "";
+        switch(source.toLowerCase()) {
+            case "bitbucket":
+                host = "BitBucket";
+                break;
+            case "github":
+            case "gist":
+                host = "Github";
+                break;
+        }
 
         var ws = worksheet();
         ws.segments = ko.observableArray(worksheetParser.parse(worksheetData));
@@ -35,7 +45,7 @@ var app = function () {
         self.sourceURL(sourceURL);
         self.filename(worksheetName);
         self.source(source);
-        self.host((source.toLowerCase() === "bitbucket") ? "Bitbucket" : "GitHub");
+        self.host(host);
 
         // wire up the UI
         ko.applyBindings(self, document.getElementById("document"));
