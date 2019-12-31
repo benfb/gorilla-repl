@@ -260,6 +260,10 @@ var app = function () {
         self.docViewer.hide();
     });
 
+    eventBus.on("app:open-new-tab", function (e, d) {
+        window.open(window.location.href);
+    });
+
     return self;
 };
 

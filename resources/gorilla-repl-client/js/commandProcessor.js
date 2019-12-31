@@ -276,5 +276,14 @@ commandList = [
         action: function () {
             eventBus.trigger("worksheet:reindent");
         }
+    },
+    {
+        name: "command:app:open-new-tab",
+        desc: "Open current link in new tab.",
+        showInMenu: true,
+        kb: combo('t', 'n'),
+        action: function () {
+            eventBus.trigger("app:open-new-tab");
+        }
     }
 ];
