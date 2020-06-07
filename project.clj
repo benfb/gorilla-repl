@@ -2,7 +2,7 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(defproject org.clojars.benfb/gorilla-repl "0.5.2"
+(defproject org.clojars.benfb/gorilla-repl "0.6.0"
   :description "A rich REPL for Clojure in the notebook style."
   :url "https://github.com/benfb/gorilla-repl"
   :license {:name "MIT"}
@@ -15,8 +15,8 @@
                            [gorilla-renderable "2.0.0"]
                            [gorilla-plot "0.1.4" :exclusions [org.clojure/clojure]]
                            [grimradical/clj-semver "0.2.0" :exclusions [org.clojure/clojure]]
-                           [cider/cider-nrepl "0.18.0" :exclusions [org.clojure/clojure]]
-                           [nrepl/nrepl "0.5.0-SNAPSHOT"]]
+                           [cider/cider-nrepl "0.21.1" :exclusions [org.clojure/clojure]]
+                           [nrepl/nrepl "0.6.0"]]
   :main ^:skip-aot gorilla-repl.core
   :target-path "target/%s"
   :jvm-opts ~(let [version    (System/getProperty "java.version")

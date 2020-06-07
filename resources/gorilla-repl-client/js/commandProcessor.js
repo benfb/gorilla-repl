@@ -250,6 +250,15 @@ commandList = [
         }
     },
     {
+        name: "command:browser:newtab",
+        desc: "Opens a new worksheet in a new browser tab.",
+        showInMenu: true,
+        kb: combo('g', 't'),
+        action: function () {
+            eventBus.trigger("browser:newtab");
+        }
+    },
+    {
         name: "command:app:reset-worksheet",
         desc: "Reset the worksheet - a fresh start.",
         showInMenu: true,

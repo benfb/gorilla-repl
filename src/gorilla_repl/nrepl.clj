@@ -1,7 +1,8 @@
 (ns gorilla-repl.nrepl
   (:require [gorilla-repl.websocket-relay :as ws-relay]
             [nrepl.server :as nrepl-server]
-            [nrepl.middleware.pr-values :as pr-values]
+            [nrepl.middleware.print :as print]
+            [gorilla-repl.render-values-mw :as render-mw]
             [cider.nrepl :as cider]
             [clojure.java.io :as io]))
 
@@ -10,7 +11,7 @@
 (defn start-and-connect
   ([nrepl-requested-port repl-port-file]
    (let [cider-mw (map resolve cider/cider-middleware)
-         middleware (conj cider-mw #'pr-values/pr-values)
+         middleware (conj cider-mw #'print/wrap-print)
          nr (nrepl-server/start-server :port nrepl-requested-port
                                        :handler (apply nrepl-server/default-handler middleware))
          nrepl-port (:port nr)]

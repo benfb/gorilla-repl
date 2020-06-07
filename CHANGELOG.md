@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.6.0
+- Fix printing bug caused by new nREPL version (#10)
+
+## Version 0.5.3
+- Update the version update check server to be hosted by me
+
 ## Version 0.5.2
 - Fix the creation of extraneous newline characters when loading a non-Gorilla Clojure file (#286)
 - Warn in the browser when closing the Gorilla tab (this will be optional in 0.5.3) (#236)
