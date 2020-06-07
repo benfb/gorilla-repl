@@ -358,6 +358,13 @@ var worksheet = function () {
             }
         });
 
+        // * Browser interaction *
+
+        addEventHandler("browser:newtab", function () {
+            var url = location.protocol+"//"+location.host+location.pathname;
+            var win = window.open(url, "_blank");
+        });
+
         // * Clearing output *
 
         var clearSegment = function(seg) {
