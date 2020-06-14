@@ -2,15 +2,15 @@
 ;;;;
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
-(defproject org.clojars.benfb/gorilla-repl "0.7.0"
+(defproject org.clojars.benfb/gorilla-repl "0.7.1-SNAPSHOT"
   :description "A rich REPL for Clojure in the notebook style."
   :url "https://github.com/benfb/gorilla-repl"
   :license {:name "MIT"}
   :dependencies ^:replace [[org.clojure/clojure "1.10.1"]
-                           [http-kit "2.4.0-alpha6" :exclusions [ring/ring-core]]
+                           [http-kit "2.4.0-alpha6"]
                            [ring/ring-json "0.5.0" :exclusions [org.clojure/clojure]]
                            [cheshire "5.9.0"]
-                           [compojure "1.6.1" :exclusions [ring/ring-core ring/ring-json]]
+                           [metosin/reitit "0.5.2"]
                            [gorilla-renderable "2.0.0"]
                            [gorilla-plot "0.1.4" :exclusions [org.clojure/clojure]]
                            [grimradical/clj-semver "0.2.0" :exclusions [org.clojure/clojure]]
