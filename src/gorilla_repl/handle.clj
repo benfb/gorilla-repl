@@ -58,10 +58,10 @@
 (def ^:private conf (atom {}))
 
 ;; API endpoint for getting webapp configuration information
-(defn config [req] (res/response @conf))
+(defn config [_req] (res/response @conf))
 
 ;; API endpoint for getting the list of worksheets in the project
-(defn gorilla-files [req]
+(defn gorilla-files [_req]
   (let [excludes @excludes]
     (res/response {:files (files/gorilla-filepaths-in-current-directory excludes)})))
 

@@ -2,9 +2,7 @@
   (:require [gorilla-repl.websocket-relay :as ws-relay]
             [nrepl.server :as nrepl-server]
             [nrepl.middleware.print :as print]
-            [gorilla-repl.render-values-mw :as render-mw]
-            [cider.nrepl :as cider]
-            [clojure.java.io :as io]))
+            [cider.nrepl :as cider]))
 
 (def nrepl (atom nil))
 
@@ -16,6 +14,6 @@
                                        :handler (apply nrepl-server/default-handler middleware))
          nrepl-port (:port nr)]
      (println "Started nREPL server on port" nrepl-port)
-     (swap! nrepl (fn [x] nr))
+     (swap! nrepl (fn [_] nr))
      (ws-relay/connect-to-nrepl nrepl-port)
      (spit (doto repl-port-file .deleteOnExit) nrepl-port))))

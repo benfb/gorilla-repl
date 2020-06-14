@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.7.0
+- Upgrade dependencies
+- Add ability to view worksheets from arbitrary path or URL (#11) (thanks to @jasonmm)
+- Add a key command to open a blank worksheet in a new browser tab (#12) (thanks to @jasonmm)
+
 ## Version 0.6.0
 - Fix printing bug caused by new nREPL version (#10)
 
@@ -38,7 +43,7 @@
 
 ## Version 0.4.0
 
-- Allow opening and automatic conversion into worksheet of any .clj file 
+- Allow opening and automatic conversion into worksheet of any .clj file
 - Add save without markup command
 - Allow opening .cljs, .cljc, and .hl files
 
@@ -67,7 +72,7 @@
 - Cute favicon (thanks to @ticking and @ivan-kleshnin)
 - Serve up project files so they can be accessed from markdown code.
 - Switch to marked markdown renderer. Now supports tables.
-- "Save as..." command (thanks to @jococo). 
+- "Save as..." command (thanks to @jococo).
 - Running without a 'net connection doesn't crash the app.
 - Show all output from segments with multiple top-level forms.
 - Improvements to stylesheet for printing (thanks to @kurtharriger).
