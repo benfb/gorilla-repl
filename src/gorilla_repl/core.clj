@@ -3,29 +3,32 @@
 ;;;; gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
 
 (ns gorilla-repl.core
-  (:require [compojure.core :refer :all]
-            [compojure.route :as route]
-            [org.httpkit.server :as server]
-            [gorilla-repl.nrepl :as nrepl]
-            [gorilla-repl.websocket-relay :as ws-relay]
-            [gorilla-repl.renderer :as renderer] ;; this is needed to bring the render implementations into scope
-            [gorilla-repl.version :as version]
-            [gorilla-repl.handle :as handle]
-            [clojure.set :as set]
-            [clojure.java.io :as io])
+  (:require
+   [org.httpkit.server :as server]
+   [gorilla-repl.nrepl :as nrepl]
+   [gorilla-repl.websocket-relay :as ws-relay]
+   [gorilla-repl.renderer :as renderer] ;; this is needed to bring the render implementations into scope
+   [gorilla-repl.version :as version]
+   [gorilla-repl.handle :as handle]
+   [clojure.set :as set]
+   [clojure.java.io :as io]
+   [reitit.ring :as ring])
   (:gen-class))
 
 ;; the combined routes - we serve up everything in the "public" directory of resources under "/".
 ;; The REPL traffic is handled in the websocket-transport ns.
-(defroutes app-routes
-           (GET "/load" [] (handle/wrap-api-handler handle/load-worksheet))
-           (POST "/save" [] (handle/wrap-api-handler handle/save))
-           (GET "/gorilla-files" [] (handle/wrap-api-handler handle/gorilla-files))
-           (GET "/config" [] (handle/wrap-api-handler handle/config))
-           (GET "/repl" [] ws-relay/ring-handler)
-           (route/resources "/" {:root "gorilla-repl-client"})
-           (route/files "/project-files" {:root "."}))
+(def router
+  (ring/router
+   [["/load" {:get (handle/wrap-api-handler handle/load-worksheet)}]
+    ["/save" {:post (handle/wrap-api-handler handle/save)}]
+    ["/gorilla-files" {:get (handle/wrap-api-handler handle/gorilla-files)}]
+    ["/config" {:get (handle/wrap-api-handler handle/config)}]
+    ["/repl" {:get ws-relay/ring-handler}]]))
 
+(def reitit-app (ring/ring-handler router
+                                   (ring/routes
+                                    (ring/create-resource-handler
+                                     {:path "/" :root "gorilla-repl-client"}))))
 
 (defn run-gorilla-server
   [conf]
@@ -47,11 +50,12 @@
     (handle/set-config :keymap keymap)
     ;; check for updates
     (if phone-home
-      (version/check-for-update version))  ;; runs asynchronously)
+      (version/check-for-update version)
+      nil)  ;; runs asynchronously)
     ;; first startup nREPL
     (nrepl/start-and-connect nrepl-requested-port nrepl-port-file)
     ;; and then the webserver
-    (let [s (server/run-server #'app-routes {:port webapp-requested-port :join? false :ip ip :max-body 500000000})
+    (let [s (server/run-server #'reitit-app {:port webapp-requested-port :join? false :ip ip :max-body 500000000})
           webapp-port (:local-port (meta s))]
       (spit (doto gorilla-port-file .deleteOnExit) webapp-port)
       (println (str "Running at http://" ip ":" webapp-port "/worksheet.html ."))
