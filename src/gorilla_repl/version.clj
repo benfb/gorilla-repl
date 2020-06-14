@@ -17,10 +17,10 @@
   "This runs asynchronously, and can be fired off and forgotten."
   [current]
   (http/get
-    (str update-url current)
-    {:timeout 30000 :as :text}
-    (fn [{:keys [status headers body error]}]
-      (if error
-        (println "Unable to reach update server.")
-        (let [body-map (apply hash-map (read-string body))]
-          (version-check (:version body-map) current))))))
+   (str update-url current)
+   {:timeout 10000 :as :text}
+   (fn [{:keys [_status _headers body error]}]
+     (if error
+       (println "Unable to reach update server.")
+       (let [body-map (apply hash-map (read-string body))]
+         (version-check (:version body-map) current))))))
